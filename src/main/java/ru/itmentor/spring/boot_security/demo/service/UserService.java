@@ -74,8 +74,8 @@ public class UserService implements UserServiceInterface{
 
     @Override
     @Transactional(readOnly = true)
-    public void deleteUser(User user) {
-        userRepository.delete(user);
+    public void deleteUser(Long id) {
+        userRepository.deleteById(id);
     }
 
     @Override
