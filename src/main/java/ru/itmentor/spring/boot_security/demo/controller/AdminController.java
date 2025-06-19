@@ -31,18 +31,18 @@ public class AdminController {
         return "admin";
     }
 
-    @GetMapping("/save")
+    @GetMapping("/saveUser")
     public String saveUser(Model model) {
         model.addAttribute("user", new User());
         model.addAttribute("roles", roleRepository.findAll());
-        return "/save";
+        return "/saveUser";
     }
 
     @PostMapping
     public String saveUser(@Valid @ModelAttribute("user") User user, BindingResult bindingResult,
                            @RequestParam("roles") Set<Long> roleId) {
         if (bindingResult.hasErrors()) {
-            return "/save";
+            return "/saveUser";
         }
         Set<Role> roles = roleId.stream()
                 .map(id -> roleRepository.findById(id).orElseThrow())
@@ -52,18 +52,18 @@ public class AdminController {
         return "redirect:/admin";
     }
 
-    @GetMapping("/update")
+    @GetMapping("/updateUser")
     public String updateUser(@RequestParam("id") Long id, Model model) {
         model.addAttribute("user", userService.findUserById(id).orElseThrow());
         model.addAttribute("roles", roleRepository.findAll());
-        return "/update";
+        return "/updateUser";
     }
 
-    @PostMapping("/update")
+    @PostMapping("/updateUser")
     public String updateUser(@Valid @ModelAttribute("user") User user, BindingResult bindingResult,
                              @RequestParam("roles") Set<Long> roleId) {
         if (bindingResult.hasErrors()) {
-            return "/update";
+            return "/updateUser";
         }
         Set<Role> roles = roleId.stream()
                 .map(id -> roleRepository.findById(id).orElseThrow())
@@ -73,7 +73,7 @@ public class AdminController {
         return "redirect:/admin";
     }
 
-    @GetMapping("/delete")
+    @GetMapping("/deleteUser")
     public String deleteUser(@RequestParam("id") Long id) {
         userService.deleteUser(id);
         return "redirect:/admin";
