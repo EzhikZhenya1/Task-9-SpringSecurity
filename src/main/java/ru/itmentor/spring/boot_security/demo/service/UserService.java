@@ -29,8 +29,8 @@ public class UserService implements UserServiceInterface{
     @PostConstruct
     @Transactional
     public void init() {
-        Role admin = createRole("ADMIN");
-        Role user = createRole("USER");
+        Role admin = createRole("ROLE_ADMIN");
+        Role user = createRole("ROLE_USER");
 
         createUser("admin", "admin", admin, user);
         createUser("user", "user", user);
