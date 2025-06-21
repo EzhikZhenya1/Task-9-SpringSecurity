@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.*;
 import ru.itmentor.spring.boot_security.demo.model.Role;
 import ru.itmentor.spring.boot_security.demo.model.User;
 import ru.itmentor.spring.boot_security.demo.repository.RoleRepository;
-import ru.itmentor.spring.boot_security.demo.service.UserService;
+import ru.itmentor.spring.boot_security.demo.service.UserServiceInterface;
 
 import javax.validation.Valid;
 import java.util.List;
@@ -19,12 +19,12 @@ import java.util.stream.Collectors;
 @RequiredArgsConstructor
 @RequestMapping("/admin")
 public class AdminController {
-    private final UserService userService;
+    private final UserServiceInterface userServiceInterface;
     private final RoleRepository roleRepository;
 
     @GetMapping
     public String findUsers(Model model) {
-        List<User> users = userService.findUsers();
+        List<User> users = userServiceInterface.findUsers();
         model.addAttribute("users", users);
         return "admin";
     }
@@ -46,13 +46,13 @@ public class AdminController {
                 .map(id -> roleRepository.findById(id).orElseThrow())
                 .collect(Collectors.toSet());
         user.setRoles(roles);
-        userService.saveUser(user);
-        return "redirect:/admin";
+        userServiceInterface.saveUser(user);
+        return "redirect:/admin/";
     }
 
     @GetMapping("/updateUser")
     public String updateUser(@RequestParam("id") Long id, Model model) {
-        model.addAttribute("user", userService.findUserById(id).orElseThrow());
+        model.addAttribute("user", userServiceInterface.findUserById(id).orElseThrow());
         model.addAttribute("roles", roleRepository.findAll());
         return "/updateUser";
     }
@@ -67,13 +67,13 @@ public class AdminController {
                 .map(id -> roleRepository.findById(id).orElseThrow())
                 .collect(Collectors.toSet());
         user.setRoles(roles);
-        userService.saveUser(user);
-        return "redirect:/admin";
+        userServiceInterface.saveUser(user);
+        return "redirect:/admin/";
     }
 
     @GetMapping("/deleteUser")
     public String deleteUser(@RequestParam("id") Long id) {
-        userService.deleteUser(id);
-        return "redirect:/admin";
+        userServiceInterface.deleteUser(id);
+        return "redirect:/admin/";
     }
 }

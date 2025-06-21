@@ -20,12 +20,12 @@
                 <td><input type="password" th:field="*{password}" id="password" placeholder="Password"/></td>
             </tr>
             <tr>
-                <td><label for="firstName">Name</label></td>
-                <td><input type="text" th:field="*{firstName}" id="firstName" placeholder="Name"/></td>
+                <td><label for="first_name">Name</label></td>
+                <td><input type="text" th:field="*{firstname}" id="first_name" placeholder="Name"/></td>
             </tr>
             <tr>
-                <td><label for="lastName">Surname</label></td>
-                <td><input type="text" th:field="*{lastName}" id="lastName" placeholder="Surname"/></td>
+                <td><label for="last_name">Surname</label></td>
+                <td><input type="text" th:field="*{lastname}" id="last_name" placeholder="Surname"/></td>
             </tr>
             <tr>
                 <td><label for="age">Age</label></td>
@@ -33,8 +33,12 @@
             </tr>
             <tr>
                 <td><label for="roles">Role</label></td>
-                <td><select th:field="*{roles}" id="roles" multiple="multiple">
-                        <option th:each="role : ${roles}" th:value="${role.id}" th:text="${role.name}"></option>
+                <td>
+                    <select th:field="*{roles}" id="roles" multiple="multiple">
+                        <option th:each="role : ${roles}"
+                                th:value="${role.id}"
+                                th:text="${role.name}">
+                        </option>
                     </select>
                 </td>
             </tr>

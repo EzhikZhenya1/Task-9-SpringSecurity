@@ -9,32 +9,32 @@
         <button type="submit">Logout</button>
     </form>
     <h1>Update user</h1>
-    <form action="#" th:action="@{/admin/updateUser}" method="post">
+    <form th:action="@{/admin/updateUser}" method="post">
         <input type="hidden" th:name="id" th:value="${user.id}">
         <table>
             <tr>
                 <td><label for="username">Login</label> </td>
-                <td><input type="text" id="username" th:value="${user.username}" placeholder="Username"></td>
+                <td><input type="text" id="username" name="username" th:value="${user.username}" placeholder="Username"/></td>
             </tr>
             <tr>
                 <td><label for="password">Password</label></td>
-                <td><input type="password" id="password" name="password"></td>
+                <td><input type="password" id="password" name="password"/></td>
             </tr>
             <tr>
-                <td><label for="firstName">Name</label></td>
-                <td><input type="text" id="firstName" name="firstName" th:value="${user.firstName}" placeholder="Name"></td>
+                <td><label for="firstname">Name</label></td>
+                <td><input type="text" id="firstname" name="firstname" th:value="${user.firstname}" placeholder="Name"/></td>
             </tr>
             <tr>
-                <td><label for="lastName">Surname</label></td>
-                <td><input type="text" id="lastName" name="lastName" th:value="${user.lastName}" placeholder="Surname"></td>
+                <td><label for="lastname">Surname</label></td>
+                <td><input type="text" id="lastname" name="lastname" th:value="${user.lastname}" placeholder="Surname"/></td>
             </tr>
             <tr>
                 <td><label for="age">Age</label></td>
-                <td><input type="number" id="age" name="age" th:value="${user.age}" placeholder="Age"></td>
+                <td><input type="number" id="age" name="age" th:value="${user.age}" placeholder="Age"/></td>
             </tr>
             <tr>
                 <td><label for="roles">Role</label></td>
-                <td><select name="roles" id="roles" multiple="multiple">
+                <td><select id="roles" name="roles" multiple="multiple">
                     <option th:each="role : ${roles}" th:value="${role.id}" th:text="${role.name}" th:selected="${#lists.contains(user.roles, role)}">
 
                     </option>

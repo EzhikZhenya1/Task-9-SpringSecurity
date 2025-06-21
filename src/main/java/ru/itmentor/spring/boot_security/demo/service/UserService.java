@@ -57,7 +57,7 @@ public class UserService implements UserServiceInterface{
 
 
     @Override
-    @Transactional(readOnly = true)
+    @Transactional
     public void saveUser(User user) {
         if (user.getId() == null) {
             user.setPassword(passwordEncoder.encode(user.getPassword()));
@@ -73,7 +73,7 @@ public class UserService implements UserServiceInterface{
     }
 
     @Override
-    @Transactional(readOnly = true)
+    @Transactional
     public void deleteUser(Long id) {
         userRepository.deleteById(id);
     }
