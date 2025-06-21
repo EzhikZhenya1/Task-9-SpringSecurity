@@ -8,16 +8,17 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import ru.itmentor.spring.boot_security.demo.model.User;
 import ru.itmentor.spring.boot_security.demo.service.UserService;
+import ru.itmentor.spring.boot_security.demo.service.UserServiceInterface;
 
 @Controller
 @RequiredArgsConstructor
 @RequestMapping("/user")
 public class UserController {
-    private final UserService userService;
+    private final UserServiceInterface userServiceInterface;
 
     @GetMapping
     private String userPage(@AuthenticationPrincipal User userPrincipal, Model model) {
-        User user = userService.findUserById(userPrincipal.getId()).orElseThrow();
+        User user = userServiceInterface.findUserById(userPrincipal.getId()).orElseThrow();
         model.addAttribute("user", user);
         return "user";
     }

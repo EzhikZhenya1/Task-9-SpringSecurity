@@ -23,8 +23,8 @@
         <tr th:each="user : ${users}">
             <td th:text="${user.id}"></td>
             <td th:text="${user.username}"></td>
-            <td th:text="${user.firstName}"></td>
-            <td th:text="${user.lastName}"></td>
+            <td th:text="${user.firstname}"></td>
+            <td th:text="${user.lastname}"></td>
             <td th:text="${user.age}"></td>
             <td>
                 <span th:each="role, iteration : ${user.roles}" th:text="${role.name} + (${iteration.last} ? '' : ', ')"></span>
